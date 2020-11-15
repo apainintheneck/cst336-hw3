@@ -6,14 +6,13 @@
         <link href="css/styles.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
     </head>
     <body class="text-center mx-auto">
         
         <!--Title-->
         <div class="jumbotron mx-auto">
-            <h1 id="word-title">Random</h1>
+            <h1 id="word-title">Nym Cloud</h1>
         </div>
         
         <!--Intro Cards-->
@@ -27,19 +26,17 @@
             </div>
             <!--Enter Word Card-->
             <div class="card bg-light">
-                <div class="card-header">Enter Word</div>
+                <div class="card-header">Enter a Word</div>
                 <div class="card-body">
                     <div class="input-group mb-3">
-                        <input id="img-url" type="text" class="form-control" placeholder="random" aria-label="Image URL" aria-describedby="basic-addon2">
+                        <input id="input-word" type="text" class="form-control" placeholder="example" aria-label="word" aria-describedby="word-to-lookup">
                         <div class="input-group-append">
-                            <button id="enter-url" type="button" class="btn btn-outline-secondary">Enter</button>
+                            <button id="enter-word" type="button" class="btn btn-outline-secondary">Enter</button>
                         </div>
                     </div>
                     
                     <!--Word Error Alert-->
-                    <div id="wordErrAlert" class="alert alert-secondary alert-dismissible mx-auto">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    </div>
+                    <div id="wordErrAlert"></div>
                 </div>
             </div>
         </div>
