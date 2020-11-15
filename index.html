@@ -12,7 +12,7 @@
         
         <!--Title-->
         <div class="jumbotron mx-auto">
-            <h1 id="word-title">Nym Cloud</h1>
+            <h1>Nym Cloud</h1>
         </div>
         
         <!--Intro Cards-->
@@ -21,7 +21,7 @@
             <div class="card bg-light">
                 <div class="card-header">Welcome to <b>Nym Cloud</b>!</div>
                 <div class="card-body text-left">
-                    Enter any English word to find syno<b>nym</b>s, anto<b>nym</b>s, and related words. Click on any word below to learn more about that word.
+                    Enter any English word to find syno<b>nym</b>s and anto<b>nym</b>s. Use the dropdown menus to find the usage and definition you're looking for. Click on any word below to learn more about that word.
                 </div>
             </div>
             <!--Enter Word Card-->
@@ -29,7 +29,7 @@
                 <div class="card-header">Enter a Word</div>
                 <div class="card-body">
                     <div class="input-group mb-3">
-                        <input id="input-word" type="text" class="form-control" placeholder="example" aria-label="word" aria-describedby="word-to-lookup">
+                        <input id="input-word" type="text" class="form-control" placeholder="random" aria-label="word" aria-describedby="word-to-lookup">
                         <div class="input-group-append">
                             <button id="enter-word" type="button" class="btn btn-outline-secondary">Enter</button>
                         </div>
@@ -45,7 +45,12 @@
         <div id="define-card" class="card bg-light mt-3 mx-auto">
             <div class="card-header">Definition</div>
             <div class="card-body text-left">
-                <div id="definition"></div>
+                <h3 id="word-title" class="text-left"></h3>
+                </div>
+                <br>
+                <h6 class="text-left ml-3"><b>Usage:</b> <select id="word-usage"></select></h6>
+                <hr>
+                <div class="text-left ml-3 mb-3"><b>Definition:</b> <select id="definition"></select></div>
             </div>
         </div>
         
@@ -61,12 +66,6 @@
                 <div class="card-header">Antonyms</div>
                 <div class="card-body">
                     <div id="antonyms-text"></div>
-                </div>
-            </div>
-            <div id="copy-card" class="card border-info">
-                <div class="card-header">Related</div>
-                <div class="card-body">
-                    <div id="related-words-text"></div>
                 </div>
             </div>
         </div>
