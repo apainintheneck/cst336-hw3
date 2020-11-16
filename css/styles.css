@@ -15,6 +15,7 @@ body {
 }
 
 select {
+    max-width: 700px;
     border-color: rgba(0, 0, 0, .2);
 }
 
