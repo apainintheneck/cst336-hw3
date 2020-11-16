@@ -106,11 +106,12 @@ $(document).ready(function(){
         let usageIndex = Number($("#word-usage").val());
         let defIndex = Number($("#definition").val());
         
-        //Add synonyms
+        
         $("#synonyms-text").html("");
-        if(data[usageIndex].meta.syns.length < defIndex) {
+        //Validate that synonym array exists.
+        if(data[usageIndex].meta.syns.length <= defIndex) {
             $("#synonyms-text").append(`None Found.`);
-        } else {
+        } else { //Add synonyms
             for(let i = 0; i < data[usageIndex].meta.syns[defIndex].length; i++) {
                 $("#synonyms-text").append(`<button type="button" class="btn btn-outline-primary word-btn">${data[usageIndex].meta.syns[defIndex][i]}</button>`);
             }
@@ -122,11 +123,11 @@ $(document).ready(function(){
         let usageIndex = Number($("#word-usage").val());
         let defIndex = Number($("#definition").val());
         
-        //Add antonyms
         $("#antonyms-text").html("");
-        if(data[usageIndex].meta.ants.length < defIndex) {
+        //Validate that antonym array exists.
+        if(data[usageIndex].meta.ants.length <= defIndex) {
             $("#antonyms-text").append(`None Found.`);
-        } else {
+        } else { //Add antonyms
             for(let i = 0; i < data[usageIndex].meta.ants[defIndex].length; i++) {
                 $("#antonyms-text").append(`<button type="button" class="btn btn-outline-danger word-btn">${data[usageIndex].meta.ants[defIndex][i]}</button>`);
             }
