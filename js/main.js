@@ -4,6 +4,8 @@ $(document).ready(function(){
     const apiKey = "0a4a967d-fbcb-424d-9e52-b06b00ca52cb";
     var data;
     
+    loadData("random");
+    
     //Event Listeners
     $("#enter-word").click(function(){
         let inputWord = $("#input-word").val();
@@ -16,6 +18,17 @@ $(document).ready(function(){
     $(document).on("click", ".word-btn", function(){
         $("#input-word").val($(this).text());
         loadData($(this).text());
+    });
+    
+    $("#word-usage").on("change", function(){
+        displayDefinitions();
+        displaySynonyms();  
+        displayAntonyms();
+    });
+    
+    $("#definition").on("change", function(){
+        displaySynonyms();  
+        displayAntonyms();
     });
     
     //Functions
@@ -39,9 +52,9 @@ $(document).ready(function(){
         let url = `https://www.dictionaryapi.com/api/v3/references/thesaurus/json/${word}?key=${apiKey}`;
         let response = await fetch(url);
         let newData = await response.json();
-        console.log(data);
+        console.log(newData);
         
-        if(newData.length === 0) {
+        if(newData.length === 0 || (typeof newData[0]) === "string") {
             $("#wordErrAlert").html("Unable to find word. Try another one.");
             return;
         } else {
@@ -60,28 +73,46 @@ $(document).ready(function(){
             }
         }
         
+        displayDefinitions();
+        displaySynonyms();  
+        displayAntonyms();
+    }
+    
+    function displayDefinitions() {
+        let usageIndex = Number($("#word-usage").val());
+        
         $("#definition").html("");
-        for(let i = 0; i < data[0].shortdef.length; i++) {
-            $("#definition").append(`<option value="${i}"> ${data[0].shortdef[i]}`);
+        for(let i = 0; i < data[usageIndex].shortdef.length; i++) {
+            $("#definition").append(`<option value="${i}"> ${data[usageIndex].shortdef[i]}`);
         }
+    }
+    
+    function displaySynonyms() {
+        let usageIndex = Number($("#word-usage").val());
+        let defIndex = Number($("#definition").val());
         
         //Add synonyms
         $("#synonyms-text").html("");
-        if(data[0].meta.syns.length === 0) {
+        if(data[usageIndex].meta.syns.length === 0) {
             $("#synonyms-text").append(`None Found.`);
         } else {
-            for(let i = 0; i < data[0].meta.syns[0].length; i++) {
-                $("#synonyms-text").append(`<button type="button" class="btn btn-outline-primary word-btn">${data[0].meta.syns[0][i]}</button>`);
+            for(let i = 0; i < data[usageIndex].meta.syns[defIndex].length; i++) {
+                $("#synonyms-text").append(`<button type="button" class="btn btn-outline-primary word-btn">${data[usageIndex].meta.syns[defIndex][i]}</button>`);
             }
-        }    
-            
+        } 
+    }
+    
+    function displayAntonyms() {
+        let usageIndex = Number($("#word-usage").val());
+        let defIndex = Number($("#definition").val());
+        
         //Add antonyms
         $("#antonyms-text").html("");
-        if(data[0].meta.ants.length === 0) {
+        if(data[usageIndex].meta.ants.length === 0) {
             $("#antonyms-text").append(`None Found.`);
         } else {
-            for(let i = 0; i < data[0].meta.ants[0].length; i++) {
-                $("#antonyms-text").append(`<button type="button" class="btn btn-outline-danger word-btn">${data[0].meta.ants[0][i]}</button>`);
+            for(let i = 0; i < data[usageIndex].meta.ants[defIndex].length; i++) {
+                $("#antonyms-text").append(`<button type="button" class="btn btn-outline-danger word-btn">${data[usageIndex].meta.ants[defIndex][i]}</button>`);
             }
         }
     }
