@@ -62,7 +62,7 @@ $(document).ready(function(){
         let url = `https://www.dictionaryapi.com/api/v3/references/thesaurus/json/${word}?key=${apiKey}`;
         let response = await fetch(url);
         let newData = await response.json();
-        console.log(newData);
+        //console.log(newData); //For testing purposes only
         
         if(newData.length === 0 || (typeof newData[0]) === "string") {
             $("#wordErrAlert").html("Unable to find word. Try another one.");
@@ -108,7 +108,7 @@ $(document).ready(function(){
         
         //Add synonyms
         $("#synonyms-text").html("");
-        if(data[usageIndex].meta.syns.length === 0) {
+        if(data[usageIndex].meta.syns.length < defIndex) {
             $("#synonyms-text").append(`None Found.`);
         } else {
             for(let i = 0; i < data[usageIndex].meta.syns[defIndex].length; i++) {
@@ -124,7 +124,7 @@ $(document).ready(function(){
         
         //Add antonyms
         $("#antonyms-text").html("");
-        if(data[usageIndex].meta.ants.length === 0) {
+        if(data[usageIndex].meta.ants.length < defIndex) {
             $("#antonyms-text").append(`None Found.`);
         } else {
             for(let i = 0; i < data[usageIndex].meta.ants[defIndex].length; i++) {
