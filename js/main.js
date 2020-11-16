@@ -14,7 +14,7 @@ $(document).ready(function(){
         let data = await response.json();
         console.log(data);
         
-        if(data.length < 1) {
+        if(!data && data.length < 1) {
             $("#wordErrAlert").html("Unable to find word. Try another one.");
             return;
         }
@@ -28,17 +28,26 @@ $(document).ready(function(){
         }
         $("#word-usage").append(`hr>`);
         
-        
         $("#definition").html("");
-        
         for(let i = 0; i < data[0].shortdef.length; i++) {
             $("#definition").append(`<option value="${i}"> ${data[0].shortdef[i]}`);
         }
         
-        //Add synonyms 
-        
+        //Add synonyms
+        $("#synonyms-text").html("");
+        for(let i = 0; i < data[0].meta.syns[0].length; i++) {
+            $("#synonyms-text").append(`<button type="button" class="btn btn-outline-primary word-btn">${data[0].meta.syns[0][i]}</button>`);
+        }
         //Add antonyms
+        $("#antonyms-text").html("");
+        for(let i = 0; i < data[0].meta.ants[0].length; i++) {
+            $("#antonyms-text").append(`<button type="button" class="btn btn-outline-danger word-btn">${data[0].meta.ants[0][i]}</button>`);
+        }
         
+    });
+    
+    $(document).on("click", ".word-btn", function(){
+        alert("Clicked with text: " + $(this).text());
     });
     
     //Functions
@@ -50,6 +59,8 @@ $(document).ready(function(){
                     return false;
                 }
             }
+        } else {
+            return false;
         }
         
         $("#wordErrAlert").html("");
