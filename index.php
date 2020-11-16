@@ -13,7 +13,7 @@
         
         <!--Title-->
         <div class="jumbotron mx-auto">
-            <h1> Nym Cloud: Thesaurus </h1>
+            <h1>Nym Cloud</h1>
         </div>
         
         <!--Intro Cards-->
