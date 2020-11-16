@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title> Nym Cloud: Thesaurus </title>
+        <title> Nym Cloud </title>
         <link href="css/styles.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -12,8 +12,9 @@
     <body class="text-center mx-auto">
         
         <!--Title-->
-        <div class="jumbotron mx-auto">
+        <div class="jumbotron mx-auto text-right">
             <h1>Nym Cloud</h1>
+            <h6>Create thesaurus word clouds.</h>
         </div>
         
         <!--Intro Cards-->
@@ -22,7 +23,7 @@
             <div class="card bg-light">
                 <div class="card-header">Welcome to <b>Nym Cloud</b>!</div>
                 <div class="card-body text-left">
-                    Enter any English word to find syno<b>nym</b>s and anto<b>nym</b>s. Use the dropdown menus to find the usage and definition you're looking for. Click on any word below to learn more about that word.
+                    Enter any English word to find syno<b>nym</b>s and anto<b>nym</b>s. Use the dropdown menus to find the usage and definition that you're looking for. Click on any word below to learn more about that word.
                 </div>
             </div>
             <!--Enter Word Card-->
