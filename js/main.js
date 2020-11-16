@@ -19,7 +19,7 @@ $(document).ready(function(){
             return;
         }
         
-        $("#word-title").html(data[0].meta.id.toUpperCase());
+        $("#word-title").html(`<u>${data[0].meta.id.toUpperCase()}</u>`);
         
         for(let i = 0; i < data.length; i++){
             if(data[i].meta.id === inputWord) {
@@ -35,13 +35,22 @@ $(document).ready(function(){
         
         //Add synonyms
         $("#synonyms-text").html("");
-        for(let i = 0; i < data[0].meta.syns[0].length; i++) {
-            $("#synonyms-text").append(`<button type="button" class="btn btn-outline-primary word-btn">${data[0].meta.syns[0][i]}</button>`);
-        }
+        if(data[0].meta.syns.length < 1) {
+            $("#synonyms-text").append(`None Found.`);
+        } else {
+            for(let i = 0; i < data[0].meta.syns[0].length; i++) {
+                $("#synonyms-text").append(`<button type="button" class="btn btn-outline-primary word-btn">${data[0].meta.syns[0][i]}</button>`);
+            }
+        }    
+            
         //Add antonyms
         $("#antonyms-text").html("");
-        for(let i = 0; i < data[0].meta.ants[0].length; i++) {
-            $("#antonyms-text").append(`<button type="button" class="btn btn-outline-danger word-btn">${data[0].meta.ants[0][i]}</button>`);
+        if(data[0].meta.ants.length < 1) {
+            $("#antonyms-text").append(`None Found.`);
+        } else {
+            for(let i = 0; i < data[0].meta.ants[0].length; i++) {
+                $("#antonyms-text").append(`<button type="button" class="btn btn-outline-danger word-btn">${data[0].meta.ants[0][i]}</button>`);
+            }
         }
         
     });
