@@ -41,7 +41,7 @@ $(document).ready(function(){
         let newData = await response.json();
         console.log(data);
         
-        if(data.length === 0) {
+        if(newData.length === 0) {
             $("#wordErrAlert").html("Unable to find word. Try another one.");
             return;
         } else {
