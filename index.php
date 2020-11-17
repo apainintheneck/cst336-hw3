@@ -30,12 +30,12 @@
             <div class="card bg-light">
                 <div class="card-header">Enter a Word</div>
                 <div class="card-body">
-                    <div class="input-group mb-3">
+                    <form id="text-box" class="input-group mb-3">
                         <input id="input-word" type="text" class="form-control" placeholder="Enter any English word..." aria-label="word" aria-describedby="word-to-lookup">
                         <div class="input-group-append">
-                            <button id="enter-word" type="button" class="btn btn-outline-secondary">Enter</button>
+                            <button type="submit" class="btn btn-outline-secondary">Enter</button>
                         </div>
-                    </div>
+                    </form>
                     
                     <!--Word Error Alert-->
                     <div id="wordErrAlert"></div>

@@ -6,18 +6,32 @@ import { defaultData, defaultWord } from "./data.js";
 $(document).ready(function(){
     const apiKey = "0a4a967d-fbcb-424d-9e52-b06b00ca52cb";
     var data = defaultData; //Load default data.
+    var prevWord = defaultWord; //Load previous word.
     
     //Display default word data.
     displayData(defaultWord);
     
     //---Event Listeners---
     //For enter word text box.
-    $("#enter-word").click(function(){
-        let inputWord = $("#input-word").val();
+    $("#text-box").on("submit", function(event){
+        //Prevent default action of form to reload page.
+        event.preventDefault();
         
-        if(!isWordValid(inputWord)) return;
+        let newWord = $("#input-word").val();
         
-        loadData(inputWord);
+        //Return if entered word equals the previous word or the displayed word.
+        if(newWord === prevWord){
+            return;
+        } else if(newWord.toUpperCase() === $("#word-title").text()){
+            $("#wordErrAlert").html("");
+            prevWord = newWord;
+        } else {
+            prevWord = newWord;
+        }
+        
+        if(!isWordValid(newWord)) return;
+        
+        loadData(newWord);
     });
     
     //For clickable synonyms and antonyms buttons.
@@ -50,6 +64,7 @@ $(document).ready(function(){
                 }
             }
         } else {
+            $("#wordErrAlert").html("");
             return false;
         }
         
@@ -62,14 +77,24 @@ $(document).ready(function(){
         let url = `https://www.dictionaryapi.com/api/v3/references/thesaurus/json/${word}?key=${apiKey}`;
         let response = await fetch(url);
         let newData = await response.json();
-        //console.log(newData); //For testing purposes only
+        // console.log(newData); //For testing purposes only
         
+        //Check Data
         if(newData.length === 0 || (typeof newData[0]) === "string") {
             $("#wordErrAlert").html("Unable to find word. Try another one.");
             return;
         } else {
-            data = newData;
-            displayData(word, data);
+            //Make sure that a matching word was returned from the database.
+            for(let i = 0; i < newData.length; i++){
+                if(newData[i].meta.id === word.toLowerCase()){
+                    data = newData;
+                    displayData(word, data);
+                    return;
+                }
+            }
+            
+            $("#wordErrAlert").html("Unable to find word. Try another one.");
+            return;
         }
     }
     
@@ -82,7 +107,7 @@ $(document).ready(function(){
         $("#word-usage").html("");
         for(let i = 0; i < data.length; i++){
             if(data[i].meta.id === word) {
-                $("#word-usage").append(`<option value="${i}"> ${data[i].fl}`);
+                $("#word-usage").append(`<option value="${i}"> ${data[i].fl} </option>`);
             }
         }
         
@@ -97,7 +122,7 @@ $(document).ready(function(){
         
         $("#definition").html("");
         for(let i = 0; i < data[usageIndex].shortdef.length; i++) {
-            $("#definition").append(`<option value="${i}"> ${data[usageIndex].shortdef[i]}`);
+            $("#definition").append(`<option value="${i}"> ${data[usageIndex].shortdef[i]} </option>`);
         }
     }
     
